@@ -1,0 +1,3 @@
+Test-Memory-Usage-*.tar.gz
+Test-Memory-Usage-*/
+*.sw?
