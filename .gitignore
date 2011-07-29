@@ -1,3 +1,4 @@
 Test-Memory-Usage-*.tar.gz
 Test-Memory-Usage-*/
+/.build/
 *.sw?
