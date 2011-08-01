@@ -73,11 +73,9 @@ BEGIN {
 
 The module provides the following methods:
 
-=over 4
-
 =cut
 
-=item * memory_usage_start
+=head2 memory_usage_start
 
 This method records the current memory usage and flags it to be used for any
 growth tests later in the script.
@@ -98,7 +96,7 @@ sub memory_usage_start {
     $first_state_index = @{$mu->state} - 1;
 }
 
-=item * memory_usage_ok($percentage_limit)
+=head2 memory_usage_ok($percentage_limit)
 
 This calls the C<memory_virtual_ok()> and C<memory_rss_ok()> functions.
 
@@ -111,7 +109,7 @@ sub memory_usage_ok {
     memory_rss_ok($percentage_allowed);
 }
 
-=item * memory_virtual_ok($percentage_limit)
+=head2 memory_virtual_ok($percentage_limit)
 
 Runs the test to ensure that virtual memory usage hasn't grown more than
 C<$percentage_limit>
@@ -127,7 +125,7 @@ sub memory_virtual_ok {
 }
 
 
-=item * memory_rss_ok($percentage_limit)
+=head2 memory_rss_ok($percentage_limit)
 
 Runs the test to ensure that RSS memory usage hasn't grown more than
 C<$percentage_limit>
