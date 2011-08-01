@@ -39,6 +39,22 @@ reference point used for comparison with C<memory_usage_ok>:
         memory_usage_ok(10);
     }
 
+=head1 EXPORTS
+
+Test::Memory::Usage exports the following subs automatically:
+
+=over 4
+
+=item memory_usage_start
+
+=item memory_usage_ok
+
+=item memory_virtual_ok
+
+=item memory_rss_ok
+
+=back
+
 =cut
 
 sub import {
@@ -82,6 +98,56 @@ sub memory_usage_start {
     $first_state_index = @{$mu->state} - 1;
 }
 
+=item * memory_usage_ok($percentage_limit)
+
+This calls the C<memory_virtual_ok()> and C<memory_rss_ok()> functions.
+
+If not provided C<$percentage_limit> defaults to '10'.
+
+=cut
+sub memory_usage_ok {
+    my $percentage_allowed = shift;
+    memory_virtual_ok($percentage_allowed);
+    memory_rss_ok($percentage_allowed);
+}
+
+=item * memory_virtual_ok($percentage_limit)
+
+Runs the test to ensure that virtual memory usage hasn't grown more than
+C<$percentage_limit>
+
+This isn't usually called explicitly as most users will find
+C<memory_usage_ok()> meets their testing needs.
+
+If not provided C<$percentage_limit> defaults to '10'.
+
+=cut
+sub memory_virtual_ok {
+    return _growth_ok('virtual', 2, shift);
+}
+
+
+=item * memory_rss_ok($percentage_limit)
+
+Runs the test to ensure that RSS memory usage hasn't grown more than
+C<$percentage_limit>
+
+This isn't usually called explicitly as most users will find
+C<memory_usage_ok()> meets their testing needs.
+
+If not provided C<$percentage_limit> defaults to '10'.
+
+=cut
+sub memory_rss_ok {
+    return _growth_ok('RSS', 3, shift);
+}
+
+=pod
+
+=back
+
+=cut
+
 sub _percentage_growth {
     my ($start, $end) = @_;
     return sprintf('%.1f%%',( ($end * 1.0) / ($start * 1.0) ) * 100);
@@ -123,54 +189,6 @@ sub _growth_ok {
     );
     return $ok;
 }
-
-=item * memory_virtual_ok($percentage_limit)
-
-Runs the test to ensure that virtual memory usage hasn't grown more than
-C<$percentage_limit>
-
-This isn't usually called explicitly as most users will find
-C<memory_usage_ok()> meets their testing needs.
-
-If not provided C<$percentage_limit> defaults to '10'.
-
-=cut
-sub memory_virtual_ok {
-    return _growth_ok('virtual', 2, shift);
-}
-
-
-=item * memory_rss_ok($percentage_limit)
-
-Runs the test to ensure that RSS memory usage hasn't grown more than
-C<$percentage_limit>
-
-This isn't usually called explicitly as most users will find
-C<memory_usage_ok()> meets their testing needs.
-
-If not provided C<$percentage_limit> defaults to '10'.
-
-=cut
-sub memory_rss_ok {
-    return _growth_ok('RSS', 3, shift);
-}
-
-=item * memory_usage_ok($percentage_limit)
-
-This calls the C<memory_virtual_ok()> and C<memory_rss_ok()> functions.
-
-If not provided C<$percentage_limit> defaults to '10'.
-
-=cut
-sub memory_usage_ok {
-    my $percentage_allowed = shift;
-    memory_virtual_ok($percentage_allowed);
-    memory_rss_ok($percentage_allowed);
-}
-
-=pod
-
-=back
 
 =head1 SEE ALSO
 
