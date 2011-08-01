@@ -10,6 +10,37 @@ use base qw( Exporter );
 use vars qw( $Tester $mu $first_state_index);
 our @EXPORT = qw(memory_virtual_ok memory_rss_ok memory_usage_ok memory_usage_start);
 
+=head1 SYNOPSIS
+
+The easiest usage pattern looks like this:
+
+    use Test::Memory::Usage;
+
+    # do some setup; decide that's roughly where you should be with usage
+    # levels; draw your lin in the sand
+    memory_usage_start;
+
+    # do some things that you want to test as normal
+    # ...
+    
+    # finally, make sure you haven't run away with memory
+    memory_usage_ok;
+    done_testing;
+
+You can call C<memory_usage_start> as often as you like; each call moves the
+reference point used for comparison with C<memory_usage_ok>:
+
+    # loop over some action and make sure it doesn't grow
+    for (1 .. 5) {
+        memory_usage_start;
+
+        # bad growing code!
+    
+        memory_usage_ok(10);
+    }
+
+=cut
+
 sub import {
     my $self = shift;
     $self->export_to_level( 1, $self, $_ )
@@ -22,6 +53,28 @@ BEGIN {
     $mu->record('Memory::Usage test starting');
 };
 
+=head1 METHODS
+
+The module provides the following methods:
+
+=over 4
+
+=cut
+
+=item * memory_usage_start
+
+This method records the current memory usage and flags it to be used for any
+growth tests later in the script.
+
+You can call the method multiple times; each call adds a new state record and
+updates makes the most recent state recorded the reference point for any
+growth comparisons
+
+This is useful if you want to compare the usage after you've performed a
+certain amount of minimum setup before the area(s) of code that you want to
+verify memory usage for.
+
+=cut
 sub memory_usage_start {
     $mu->record('Memory::Usage start-marker');
     # the state to use as our base point is one fewer than the number of
@@ -71,19 +124,59 @@ sub _growth_ok {
     return $ok;
 }
 
+=item * memory_virtual_ok($percentage_limit)
+
+Runs the test to ensure that virtual memory usage hasn't grown more than
+C<$percentage_limit>
+
+This isn't usually called explicitly as most users will find
+C<memory_usage_ok()> meets their testing needs.
+
+If not provided C<$percentage_limit> defaults to '10'.
+
+=cut
 sub memory_virtual_ok {
     return _growth_ok('virtual', 2, shift);
 }
 
+
+=item * memory_rss_ok($percentage_limit)
+
+Runs the test to ensure that RSS memory usage hasn't grown more than
+C<$percentage_limit>
+
+This isn't usually called explicitly as most users will find
+C<memory_usage_ok()> meets their testing needs.
+
+If not provided C<$percentage_limit> defaults to '10'.
+
+=cut
 sub memory_rss_ok {
     return _growth_ok('RSS', 3, shift);
 }
 
+=item * memory_usage_ok($percentage_limit)
+
+This calls the C<memory_virtual_ok()> and C<memory_rss_ok()> functions.
+
+If not provided C<$percentage_limit> defaults to '10'.
+
+=cut
 sub memory_usage_ok {
     my $percentage_allowed = shift;
     memory_virtual_ok($percentage_allowed);
     memory_rss_ok($percentage_allowed);
 }
+
+=pod
+
+=back
+
+=head1 SEE ALSO
+
+L<Memory::Usage>
+
+=cut
 
 END {
     $mu->record('Memory::Usage test completed');
