@@ -4,7 +4,7 @@ Test::Memory::Usage - make sure code doesn't unexpectedly eat all your memory
 
 # VERSION
 
-version 0.0.1
+version 0.0.2
 
 # SYNOPSIS
 
@@ -45,12 +45,13 @@ Test::Memory::Usage exports the following subs automatically:
 - memory_usage_ok
 - memory_virtual_ok
 - memory_rss_ok
+- memory_stack_ok
 
 # METHODS
 
 The module provides the following methods:
 
-- memory_usage_start
+## memory_usage_start
 
 This method records the current memory usage and flags it to be used for any
 growth tests later in the script.
@@ -63,13 +64,13 @@ This is useful if you want to compare the usage after you've performed a
 certain amount of minimum setup before the area(s) of code that you want to
 verify memory usage for.
 
-- memory_usage_ok($percentage_limit)
+## memory_usage_ok($percentage_limit)
 
 This calls the `memory_virtual_ok()` and `memory_rss_ok()` functions.
 
 If not provided `$percentage_limit` defaults to '10'.
 
-- memory_virtual_ok($percentage_limit)
+## memory_virtual_ok($percentage_limit)
 
 Runs the test to ensure that virtual memory usage hasn't grown more than
 `$percentage_limit`
@@ -79,9 +80,19 @@ This isn't usually called explicitly as most users will find
 
 If not provided `$percentage_limit` defaults to '10'.
 
-- memory_rss_ok($percentage_limit)
+## memory_rss_ok($percentage_limit)
 
 Runs the test to ensure that RSS memory usage hasn't grown more than
+`$percentage_limit`
+
+This isn't usually called explicitly as most users will find
+`memory_usage_ok()` meets their testing needs.
+
+If not provided `$percentage_limit` defaults to '10'.
+
+## memory_stack_ok($percentage_limit)
+
+Runs the test to ensure that data/stack memory usage hasn't grown more than
 `$percentage_limit`
 
 This isn't usually called explicitly as most users will find
