@@ -32,12 +32,15 @@ test_out(
       "ok 1 - array has elements\n"
     . "not ok 2 - virtual memory usage grows less than 20%\n"
     . "not ok 3 - RSS memory usage grows less than 20%\n"
-    . "ok 4 - virtual memory usage grows less than 1%\n"
-    . "ok 5 - RSS memory usage grows less than 1%\n"
-    . "not ok 6 - virtual memory usage grows less than 1%\n"
-    . "not ok 7 - RSS memory usage grows less than 1%"
+    . "not ok 4 - data/stack memory usage grows less than 20%\n"
+    . "ok 5 - virtual memory usage grows less than 1%\n"
+    . "ok 6 - RSS memory usage grows less than 1%\n"
+    . "ok 7 - data/stack memory usage grows less than 1%\n"
+    . "not ok 8 - virtual memory usage grows less than 1%\n"
+    . "not ok 9 - RSS memory usage grows less than 1%\n"
+    . "not ok 10 - data/stack memory usage grows less than 1%"
 );
-test_fail(+4);
+test_fail(+5);
 
 ok(@thingy, 'array has elements');
 memory_usage_ok(20);

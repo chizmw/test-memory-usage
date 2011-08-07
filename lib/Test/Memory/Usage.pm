@@ -8,7 +8,7 @@ use Test::Builder;
 use Sub::Uplevel qw( uplevel );
 use base qw( Exporter );
 use vars qw( $Tester $mu $first_state_index);
-our @EXPORT = qw(memory_virtual_ok memory_rss_ok memory_usage_ok memory_usage_start);
+our @EXPORT = qw(memory_virtual_ok memory_rss_ok memory_stack_ok memory_usage_ok memory_usage_start);
 
 =head1 SYNOPSIS
 
@@ -52,6 +52,8 @@ Test::Memory::Usage exports the following subs automatically:
 =item memory_virtual_ok
 
 =item memory_rss_ok
+
+=item memory_stack_ok
 
 =back
 
@@ -107,6 +109,7 @@ sub memory_usage_ok {
     my $percentage_allowed = shift;
     memory_virtual_ok($percentage_allowed);
     memory_rss_ok($percentage_allowed);
+    memory_stack_ok($percentage_allowed);
 }
 
 =head2 memory_virtual_ok($percentage_limit)
@@ -124,7 +127,6 @@ sub memory_virtual_ok {
     return _growth_ok('virtual', 2, shift);
 }
 
-
 =head2 memory_rss_ok($percentage_limit)
 
 Runs the test to ensure that RSS memory usage hasn't grown more than
@@ -138,6 +140,21 @@ If not provided C<$percentage_limit> defaults to '10'.
 =cut
 sub memory_rss_ok {
     return _growth_ok('RSS', 3, shift);
+}
+
+=head2 memory_stack_ok($percentage_limit)
+
+Runs the test to ensure that data/stack memory usage hasn't grown more than
+C<$percentage_limit>
+
+This isn't usually called explicitly as most users will find
+C<memory_usage_ok()> meets their testing needs.
+
+If not provided C<$percentage_limit> defaults to '10'.
+
+=cut
+sub memory_stack_ok {
+    return _growth_ok('data/stack', 2, shift);
 }
 
 =pod

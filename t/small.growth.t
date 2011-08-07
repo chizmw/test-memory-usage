@@ -15,7 +15,8 @@ for (1 .. 150) {
 test_out(
       "ok 1 - array has elements\n"
     . "ok 2 - virtual memory usage grows less than 20%\n"
-    . "ok 3 - RSS memory usage grows less than 20%"
+    . "ok 3 - RSS memory usage grows less than 20%\n"
+    . "ok 4 - data/stack memory usage grows less than 20%"
 );
 
 ok(@thingy, 'array has elements');
