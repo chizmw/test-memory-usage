@@ -157,12 +157,6 @@ sub memory_stack_ok {
     return _growth_ok('data/stack', 2, shift);
 }
 
-=pod
-
-=back
-
-=cut
-
 sub _percentage_growth {
     my ($start, $end) = @_;
     return sprintf('%.1f%%',( ($end * 1.0) / ($start * 1.0) ) * 100);
