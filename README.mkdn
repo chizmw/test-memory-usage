@@ -4,7 +4,7 @@ Test::Memory::Usage - make sure code doesn't unexpectedly eat all your memory
 
 # VERSION
 
-version 0.0.2
+version 0.0.3
 
 # SYNOPSIS
 
