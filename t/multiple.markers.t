@@ -29,16 +29,16 @@ grow_thingy;
 # the docs say we should be able to have a list of expected output, but we
 # seem to end up with spurious/extra newlines in the 'expected' output
 test_out(
-      "ok 1 - array has elements\n"
-    . "not ok 2 - virtual memory usage grows less than 20%\n"
-    . "not ok 3 - RSS memory usage grows less than 20%\n"
-    . "not ok 4 - data/stack memory usage grows less than 20%\n"
-    . "ok 5 - virtual memory usage grows less than 1%\n"
-    . "ok 6 - RSS memory usage grows less than 1%\n"
-    . "ok 7 - data/stack memory usage grows less than 1%\n"
-    . "not ok 8 - virtual memory usage grows less than 1%\n"
-    . "not ok 9 - RSS memory usage grows less than 1%\n"
-    . "not ok 10 - data/stack memory usage grows less than 1%"
+    'ok 1 - array has elements',
+    'not ok 2 - virtual memory usage grows less than 20%',
+    'not ok 3 - RSS memory usage grows less than 20%',
+    'not ok 4 - data/stack memory usage grows less than 20%',
+    'ok 5 - virtual memory usage grows less than 1%',
+    'ok 6 - RSS memory usage grows less than 1%',
+    'ok 7 - data/stack memory usage grows less than 1%',
+    'not ok 8 - virtual memory usage grows less than 1%',
+    'not ok 9 - RSS memory usage grows less than 1%',
+    'not ok 10 - data/stack memory usage grows less than 1%',
 );
 test_fail(+5);
 

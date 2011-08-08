@@ -22,10 +22,10 @@ for (1 .. 450_000) {
 
 # test the output from our tests
 test_out(
-      "ok 1 - array has elements\n"
-    . "not ok 2 - virtual memory usage grows less than 20%\n"
-    . "not ok 3 - RSS memory usage grows less than 20%\n"
-    . "not ok 4 - data/stack memory usage grows less than 20%"
+    'ok 1 - array has elements',
+    'not ok 2 - virtual memory usage grows less than 20%',
+    'not ok 3 - RSS memory usage grows less than 20%',
+    'not ok 4 - data/stack memory usage grows less than 20%',
 );
 test_fail(+3);
 

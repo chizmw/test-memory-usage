@@ -20,37 +20,37 @@ sub grow_thingy {
 grow_thingy;
 
 test_out(
-      "not ok 1 - virtual memory usage grows less than 10%\n"
-    . "not ok 2 - RSS memory usage grows less than 10%\n"
-    . "not ok 3 - data/stack memory usage grows less than 10%\n"
-    . "not ok 4 - virtual memory usage grows less than 10%\n"
-    . "not ok 5 - RSS memory usage grows less than 10%\n"
-    . "not ok 6 - data/stack memory usage grows less than 10%\n"
-    . "not ok 7 - virtual memory usage grows less than 10%\n"
-    . "not ok 8 - RSS memory usage grows less than 10%\n"
-    . "not ok 9 - data/stack memory usage grows less than 10%\n"
-    . "not ok 10 - virtual memory usage grows less than 10%\n"
-    . "not ok 11 - RSS memory usage grows less than 10%\n"
-    . "not ok 12 - data/stack memory usage grows less than 10%\n"
-    . "not ok 13 - virtual memory usage grows less than 10%\n"
-    . "not ok 14 - RSS memory usage grows less than 10%\n"
-    . "not ok 15 - data/stack memory usage grows less than 10%\n"
+    'not ok 1 - virtual memory usage grows less than 10%',
+    'not ok 2 - RSS memory usage grows less than 10%',
+    'not ok 3 - data/stack memory usage grows less than 10%',
+    'not ok 4 - virtual memory usage grows less than 10%',
+    'not ok 5 - RSS memory usage grows less than 10%',
+    'not ok 6 - data/stack memory usage grows less than 10%',
+    'not ok 7 - virtual memory usage grows less than 10%',
+    'not ok 8 - RSS memory usage grows less than 10%',
+    'not ok 9 - data/stack memory usage grows less than 10%',
+    'not ok 10 - virtual memory usage grows less than 10%',
+    'not ok 11 - RSS memory usage grows less than 10%',
+    'not ok 12 - data/stack memory usage grows less than 10%',
+    'not ok 13 - virtual memory usage grows less than 10%',
+    'not ok 14 - RSS memory usage grows less than 10%',
+    'not ok 15 - data/stack memory usage grows less than 10%',
 
-    . "ok 16 - virtual memory usage grows less than 10%\n"
-    . "ok 17 - RSS memory usage grows less than 10%\n"
-    . "ok 18 - data/stack memory usage grows less than 10%\n"
-    . "ok 19 - virtual memory usage grows less than 10%\n"
-    . "ok 20 - RSS memory usage grows less than 10%\n"
-    . "ok 21 - data/stack memory usage grows less than 10%\n"
-    . "ok 22 - virtual memory usage grows less than 10%\n"
-    . "ok 23 - RSS memory usage grows less than 10%\n"
-    . "ok 24 - data/stack memory usage grows less than 10%\n"
-    . "ok 25 - virtual memory usage grows less than 10%\n"
-    . "ok 26 - RSS memory usage grows less than 10%\n"
-    . "ok 27 - data/stack memory usage grows less than 10%\n"
-    . "ok 28 - virtual memory usage grows less than 10%\n"
-    . "ok 29 - RSS memory usage grows less than 10%\n"
-    . "ok 30 - data/stack memory usage grows less than 10%"
+    'ok 16 - virtual memory usage grows less than 10%',
+    'ok 17 - RSS memory usage grows less than 10%',
+    'ok 18 - data/stack memory usage grows less than 10%',
+    'ok 19 - virtual memory usage grows less than 10%',
+    'ok 20 - RSS memory usage grows less than 10%',
+    'ok 21 - data/stack memory usage grows less than 10%',
+    'ok 22 - virtual memory usage grows less than 10%',
+    'ok 23 - RSS memory usage grows less than 10%',
+    'ok 24 - data/stack memory usage grows less than 10%',
+    'ok 25 - virtual memory usage grows less than 10%',
+    'ok 26 - RSS memory usage grows less than 10%',
+    'ok 27 - data/stack memory usage grows less than 10%',
+    'ok 28 - virtual memory usage grows less than 10%',
+    'ok 29 - RSS memory usage grows less than 10%',
+    'ok 30 - data/stack memory usage grows less than 10%',
 );
 test_fail(+15);
 
