@@ -20,21 +20,21 @@ sub grow_thingy {
 grow_thingy;
 
 test_out(
-    'not ok 1 - virtual memory usage grows less than 10%',
-    'not ok 2 - RSS memory usage grows less than 10%',
-    'not ok 3 - data/stack memory usage grows less than 10%',
-    'not ok 4 - virtual memory usage grows less than 10%',
-    'not ok 5 - RSS memory usage grows less than 10%',
-    'not ok 6 - data/stack memory usage grows less than 10%',
-    'not ok 7 - virtual memory usage grows less than 10%',
-    'not ok 8 - RSS memory usage grows less than 10%',
-    'not ok 9 - data/stack memory usage grows less than 10%',
-    'not ok 10 - virtual memory usage grows less than 10%',
-    'not ok 11 - RSS memory usage grows less than 10%',
-    'not ok 12 - data/stack memory usage grows less than 10%',
-    'not ok 13 - virtual memory usage grows less than 10%',
-    'not ok 14 - RSS memory usage grows less than 10%',
-    'not ok 15 - data/stack memory usage grows less than 10%',
+    'not ok 1 - virtual memory usage grows less than 1%',
+    'not ok 2 - RSS memory usage grows less than 1%',
+    'not ok 3 - data/stack memory usage grows less than 1%',
+    'not ok 4 - virtual memory usage grows less than 1%',
+    'not ok 5 - RSS memory usage grows less than 1%',
+    'not ok 6 - data/stack memory usage grows less than 1%',
+    'not ok 7 - virtual memory usage grows less than 1%',
+    'not ok 8 - RSS memory usage grows less than 1%',
+    'not ok 9 - data/stack memory usage grows less than 1%',
+    'not ok 10 - virtual memory usage grows less than 1%',
+    'not ok 11 - RSS memory usage grows less than 1%',
+    'not ok 12 - data/stack memory usage grows less than 1%',
+    'not ok 13 - virtual memory usage grows less than 1%',
+    'not ok 14 - RSS memory usage grows less than 1%',
+    'not ok 15 - data/stack memory usage grows less than 1%',
 
     'ok 16 - virtual memory usage grows less than 10%',
     'ok 17 - RSS memory usage grows less than 10%',
@@ -63,7 +63,7 @@ for (1 .. 5) {
     grow_thingy;
 
     # end of loop - make sure we didn't grow
-    memory_usage_ok(10);
+    memory_usage_ok(1);
 }
 
 # loop test where we don't grow at all

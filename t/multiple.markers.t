@@ -30,9 +30,9 @@ grow_thingy;
 # seem to end up with spurious/extra newlines in the 'expected' output
 test_out(
     'ok 1 - array has elements',
-    'not ok 2 - virtual memory usage grows less than 20%',
-    'not ok 3 - RSS memory usage grows less than 20%',
-    'not ok 4 - data/stack memory usage grows less than 20%',
+    'not ok 2 - virtual memory usage grows less than 5%',
+    'not ok 3 - RSS memory usage grows less than 5%',
+    'not ok 4 - data/stack memory usage grows less than 5%',
     'ok 5 - virtual memory usage grows less than 1%',
     'ok 6 - RSS memory usage grows less than 1%',
     'ok 7 - data/stack memory usage grows less than 1%',
@@ -43,7 +43,7 @@ test_out(
 test_fail(+5);
 
 ok(@thingy, 'array has elements');
-memory_usage_ok(20);
+memory_usage_ok(5);
 
 # now mark another start point and call memory_usage_ok() immediately - this
 # should pass because we haven't done anything to make us grow
