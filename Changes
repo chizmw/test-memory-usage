@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.0.4.1   2011-09-20 12:03:49 Europe/London
  - Tweak %-age limits used in tests
 
 0.0.3     2011-08-08 20:05:29 Europe/London
