@@ -4,7 +4,7 @@ Test::Memory::Usage - make sure code doesn't unexpectedly eat all your memory
 
 # VERSION
 
-version 0.0.4.1
+version 0.0.5
 
 # SYNOPSIS
 
@@ -41,17 +41,17 @@ reference point used for comparison with `memory_usage_ok`:
 
 Test::Memory::Usage exports the following subs automatically:
 
-- memory_usage_start
-- memory_usage_ok
-- memory_virtual_ok
-- memory_rss_ok
-- memory_stack_ok
+- memory\_usage\_start
+- memory\_usage\_ok
+- memory\_virtual\_ok
+- memory\_rss\_ok
+- memory\_stack\_ok
 
 # METHODS
 
 The module provides the following methods:
 
-## memory_usage_start
+## memory\_usage\_start
 
 This method records the current memory usage and flags it to be used for any
 growth tests later in the script.
@@ -64,13 +64,13 @@ This is useful if you want to compare the usage after you've performed a
 certain amount of minimum setup before the area(s) of code that you want to
 verify memory usage for.
 
-## memory_usage_ok($percentage_limit)
+## memory\_usage\_ok($percentage\_limit)
 
 This calls the `memory_virtual_ok()` and `memory_rss_ok()` functions.
 
 If not provided `$percentage_limit` defaults to '10'.
 
-## memory_virtual_ok($percentage_limit)
+## memory\_virtual\_ok($percentage\_limit)
 
 Runs the test to ensure that virtual memory usage hasn't grown more than
 `$percentage_limit`
@@ -80,7 +80,7 @@ This isn't usually called explicitly as most users will find
 
 If not provided `$percentage_limit` defaults to '10'.
 
-## memory_rss_ok($percentage_limit)
+## memory\_rss\_ok($percentage\_limit)
 
 Runs the test to ensure that RSS memory usage hasn't grown more than
 `$percentage_limit`
@@ -90,7 +90,7 @@ This isn't usually called explicitly as most users will find
 
 If not provided `$percentage_limit` defaults to '10'.
 
-## memory_stack_ok($percentage_limit)
+## memory\_stack\_ok($percentage\_limit)
 
 Runs the test to ensure that data/stack memory usage hasn't grown more than
 `$percentage_limit`
@@ -103,6 +103,33 @@ If not provided `$percentage_limit` defaults to '10'.
 # SEE ALSO
 
 [Memory::Usage](http://search.cpan.org/perldoc?Memory::Usage)
+
+# AUTHOR'S NOTES
+
+I still have some concerns over the benefit of this module for testing.
+
+While it behaved fairly well locally, the test reports for failures from
+[cpantesters.org](http://cpantesters.org/distro/T/Test-Memory-Usage.html)
+demonstrated that either the approach is flawed in general, or that I'm just
+bad at writing portable tests.
+
+The module was briefly removed from the CPAN because I doubted the usefulness
+of this module and didn't want to muddy the waters with a potentially
+frustrating test module.
+
+It can sometimes be tricky to determine the right level of growth, if any,
+that you'll allow your process to have. Maybe my flaw was just that I set them
+all to be too strict.
+
+After receiving a tweet recently I decided to re-upload this module, and allow
+people to make their own choice.
+
+Any improvements to the module, or the test suite would be greatly
+appreciated. I wrote this module to attempt to prevent horrific memory leaks
+in some code I was maintaining, so this or something like this could be
+beneficial.
+
+Chisel, May 2013
 
 # AUTHOR
 

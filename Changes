@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.0.5     2013-05-19 22:11:57 UTC
  - add "author's notes"
  - set Bugtracker to 'github issues' (dist.ini)
    also specify Repository origin
