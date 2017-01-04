@@ -1,0 +1,33 @@
+dist: trusty
+language: perl
+perl:
+- '5.22'
+- 5.20.3
+- 5.18.2
+before_install:
+- git clone git://github.com/haarg/perl-travis-helper
+- source perl-travis-helper/init
+- build-perl
+- perl -V
+- cpan-install Dist::Zilla~6.008
+- git config --global user.email "travis.ci@chizography.net"
+- git config --global user.name "Travis CI"
+- build-dist
+- cd $BUILD_DIR
+install:
+- export RELEASE_TESTING=1 AUTOMATED_TESTING=1 AUTHOR_TESTING=1 HARNESS_OPTIONS=c
+  HARNESS_TIMER=1
+- cpanm --quiet --notest Devel::Cover::Report::Coveralls
+- cpanm --quiet --notest --installdeps .
+script:
+- PERL5OPT=-MDevel::Cover=-coverage,statement,branch,condition,path,subroutine prove
+  -lrsv t
+- cover
+after_success:
+- cover -report coveralls
+notifications:
+  slack:
+    secure: iSb8SoGedR6tyM3eSqiPkXokx3rFgNzvdfCYfV4ZPu0tCg7RUekDm1yStOfot2U91hreSKp7ZjoR09ZtpZP3Qqmv2A27NrMDLD7BZOCt5Q7Rnrs3NjaRL6SRhzMMYdKiw2/+9dsJuaBVmoCIoQSFXR5ZgqC5QUXGR+2JbAInunNgy6QQRrPcEEq6kZQ6dGMBTfST+wNpifRT+C5tDbop7pSOwJZe3uTdZTUW/sO5NdlPJ1h6AKd+dY2zU0skmVX2Uh62qdBZnrgjKfgarqyNe1v/eOTmPPqNkHRcOrP9z40OKETkSy7L98CY1pblePQe4fsv8ZBkFhh+p1wg34d87ud/LN0phk/RdE4xbT0hPfxs4zCFvZJTvv8TUarPw/hjFkopszJyGIiDYIolmf6AWNRWXfxCZ5DfrCVdny/seuOrXh47298HCDTK/dx5G36oIWQ3VQzXK8YCvD04clJKkRFkAjsENUnxhwds9KdxQYIRUKoN4Vwwp7MM2dg5fHU0ZZpN1Zw3M/Z3VJ5F8t3f/taPEANGlme0upc3tEuerFBhcm4MwXvK1ePqngps6nmhVXRopI+BIBA4t94qcl5T+2RbuHf/sGiqWzrHIQ8STf5uDrKW+lDN73mAQlfp71Ogs/E1fNzXIsS2IuAa8MoXb06SNyMtXX4SCTvVN9zOZCE=
+matrix:
+  allow_failures:
+  - perl: blead
